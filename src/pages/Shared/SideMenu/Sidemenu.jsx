@@ -53,7 +53,7 @@ const Sidemenu = () => {
           border: "none",
         }}
         items={items}
-        className="text-[14px] text-[#A7AFBC] mt-7 -ml-5"
+        className="text-[14px] text-[#A7AFBC] mt-7 -ml-5 font-medium"
         defaultSelectedKeys={["dashboard"]}
       />
     </div>
