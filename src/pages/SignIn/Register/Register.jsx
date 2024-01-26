@@ -1,16 +1,20 @@
 /* eslint-disable no-unused-vars */
 import { Button, Checkbox, Divider, Form, Input } from "antd";
 import React, { useState } from "react";
+import { RiUserSmileFill } from "react-icons/ri";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { Link } from "react-router-dom";
 import SignInHeader from "./../../Shared/Header/SignInHeader";
 
 const Register = () => {
+  const [registerForm] = Form.useForm();
+
   const [password, setPassword] = useState("");
 
   const onFinish = (values) => {
     console.log("Success:", values);
   };
+
   return (
     <>
       <SignInHeader />
@@ -49,22 +53,10 @@ const Register = () => {
 
           <div>
             <Form
-              name="basic"
-              // labelCol={{
-              //   span: 8,
-              // }}
-              // wrapperCol={{
-              //   span: 16,
-              // }}
-              // style={{
-              //   maxWidth: 600,
-              // }}
-              // initialValues={{
-              //   remember: true,
-              // }}
+              name="registerForm"
+              form={registerForm}
               onFinish={onFinish}
-              // onFinishFailed={onFinishFailed}
-              autoComplete="off"
+              autoComplete="on"
               className="text-start"
             >
               <Form.Item
@@ -92,6 +84,24 @@ const Register = () => {
               </Form.Item>
 
               <Form.Item
+                name="name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your username!",
+                  },
+                ]}
+              >
+                <Input
+                  className="rounded-[16px] h-[58px] text-[16px]"
+                  prefix={
+                    <RiUserSmileFill className="text-[20px] mr-2 text-[#C5CBD3]" />
+                  }
+                  placeholder="Your Name"
+                />
+              </Form.Item>
+
+              <Form.Item
                 name="password"
                 rules={[
                   {
@@ -99,87 +109,52 @@ const Register = () => {
                     message: "Please input your password!",
                   },
                 ]}
-                // rules={[
-                //   {
-                //     validator: async () => {
-                //       return level >= minLevel
-                //         ? Promise.resolve()
-                //         : Promise.reject(errorMessage);
-                //     },
-                //     message: errorMessage,
-                //   },
-                // ]}
               >
-                <Input.Password
-                  onChange={(event) => setPassword(event.target.value)}
-                  className="rounded-[16px] h-[58px] text-[16px]"
-                  placeholder="Password"
-                  prefix={
-                    <img
-                      src="/src/assets/lock.png"
-                      alt="no_image"
-                      className="w-[20px] mr-2"
-                    />
-                  }
-                />
-                <PasswordStrengthBar
-                  password={password}
-                  className="mt-6"
-                  scoreWordStyle={{
-                    display: "none",
-                  }}
-                  minLength={5}
-                />
-                {/* <PasswordInput
-              className="rounded-[16px] h-[58px] text-[16px]"
-              prefix={
-                <img
-                  src="/src/assets/lock.png"
-                  alt="no_image"
-                  className="w-[20px] mr-2"
-                />
-              }
-              placeholder="Create Password"
-              size="middle"
-              onLevelChange={setLevel}
-              settings={{
-                colorScheme: {
-                  levels: [
-                    "#ff4033",
-                    "#fe940d",
-                    "#ffd908",
-                    "#cbe11d",
-                    "#6ecc3a",
-                  ],
-                  noLevel: "lightgrey",
-                },
-                height: 3,
-                alwaysVisible: true,
-              }}
-            /> */}
+                <div>
+                  <Input.Password
+                    onChange={(event) => setPassword(event.target.value)}
+                    className="rounded-[16px] h-[58px] text-[16px]"
+                    placeholder="Create Password"
+                    prefix={
+                      <img
+                        src="/src/assets/lock.png"
+                        alt="no_image"
+                        className="w-[20px] mr-2"
+                      />
+                    }
+                  />
+                  <PasswordStrengthBar
+                    password={password}
+                    className="mt-6"
+                    scoreWordStyle={{
+                      display: "none",
+                    }}
+                    minLength={5}
+                  />
+                </div>
               </Form.Item>
 
               <Form.Item name="remember" valuePropName="checked">
                 <Checkbox className="" style={{}}>
                   <span className="text-[15px] font-medium text-[#B0B7C3]">
-                    Remember Me
+                    I agree to the Terms & Conditions
                   </span>
                 </Checkbox>
               </Form.Item>
 
-              <Form.Item>
+              <Form.Item name="button">
                 <Button
                   type="primary"
                   className="bg-[#377DFF] w-full rounded-[16px] h-[58px]"
                 >
-                  Sign In
+                  Sign Up
                 </Button>
               </Form.Item>
             </Form>
           </div>
 
-          <div className="text-[16px] font-medium text-[#B0B7C3] ">
-            {`Don't have an account yet?`}{" "}
+          <div className="text-[16px] font-medium text-[#B0B7C3]">
+            Already have an account?{" "}
             <Link className="text-[#377DFF]" to={"/login"}>
               Sign in
             </Link>

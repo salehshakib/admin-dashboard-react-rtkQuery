@@ -1,7 +1,8 @@
-import { Table } from "antd";
+/* eslint-disable no-unused-vars */
+import { Pagination, Table } from "antd";
+import React from "react";
 import { SlOptions } from "react-icons/sl";
 import { GlobalUtilityStyle } from "../../styled";
-import { Pagination } from "antd";
 
 const columns = [
   {
