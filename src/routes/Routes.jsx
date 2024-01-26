@@ -20,7 +20,6 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
-
       {
         path: "/users",
         element: (

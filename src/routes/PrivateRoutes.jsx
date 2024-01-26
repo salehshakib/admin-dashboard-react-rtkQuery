@@ -1,17 +1,20 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const PrivateRoutes = () => {
+const PrivateRoutes = ({ children }) => {
   const navigate = useNavigate();
 
   const { userInfo } = useSelector((state) => state.user);
 
-  if (!userInfo) {
-    navigate("/login");
-  }
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/login");
+    }
+  }, [navigate, userInfo]);
+
+  return children;
 };
 
 export default PrivateRoutes;
