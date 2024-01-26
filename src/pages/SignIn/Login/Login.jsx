@@ -5,7 +5,8 @@ import PasswordStrengthBar from "react-password-strength-bar";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import SignInHeader from "../../../components/SignInHeader";
-import { userLogin } from "../../../features/auth/authAction";
+import { userLogin } from "../../../features/user/userActions";
+import Error from "../../Error/Error";
 
 const Login = () => {
   const [loginForm] = Form.useForm();
@@ -26,7 +27,7 @@ const Login = () => {
     loginForm
       .validateFields()
       .then(() => {
-        const { email, password } = userLogin.getFieldsValue();
+        const { email, password } = loginForm.getFieldsValue();
         dispatch(userLogin({ email, password }));
       })
       .catch((error) => {
@@ -37,6 +38,7 @@ const Login = () => {
   return (
     <>
       <SignInHeader />
+      {error && <Error>{error}</Error>}
       <div className="mt-[122px] w-full text-center">
         <span className="font-bold text-[26px] text-[#323B4B] block">
           Getting Started
@@ -148,6 +150,7 @@ const Login = () => {
                   type="primary"
                   className="bg-[#377DFF] w-full rounded-[16px] h-[58px]"
                   onClick={onFinish}
+                  loading={loading}
                 >
                   Sign In
                 </Button>
@@ -158,7 +161,7 @@ const Login = () => {
           <div className="text-[16px] font-medium text-[#B0B7C3] ">
             {`Don't have an account yet?`}{" "}
             <Link className="text-[#377DFF]" to={"/register"}>
-              Sign in
+              Sign up
             </Link>
           </div>
         </div>

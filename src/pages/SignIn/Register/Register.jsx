@@ -6,7 +6,8 @@ import PasswordStrengthBar from "react-password-strength-bar";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import SignInHeader from "../../../components/SignInHeader";
-import { registerUser } from "../../../features/auth/authAction";
+import { registerUser } from "../../../features/auth/authActions";
+import Error from "../../Error/Error";
 
 const Register = () => {
   const [registerForm] = Form.useForm();
@@ -14,7 +15,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const { loading, userInfo, error, success } = useSelector(
-    (state) => state.auth
+    (state) => state.user
   );
 
   const [password, setPassword] = useState("");
@@ -32,8 +33,8 @@ const Register = () => {
     registerForm
       .validateFields()
       .then(() => {
-        const { email, name, password } = registerForm.getFieldsValue();
-        dispatch(registerUser({ email, name, password }));
+        const { email, password } = registerForm.getFieldsValue();
+        dispatch(registerUser({ email, password }));
       })
       .catch((error) => {
         console.error("Validation failed:", error);
@@ -43,6 +44,7 @@ const Register = () => {
   return (
     <>
       <SignInHeader />
+      {error && <Error>{error}</Error>}
       <div className="mt-[122px] w-full text-center">
         <span className="font-bold text-[26px] text-[#323B4B] block">
           Getting Started

@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import Error from "../pages/Error/Error";
 import Login from "../pages/SignIn/Login/Login";
 import Register from "../pages/SignIn/Register/Register";
 import UserList from "../pages/UserList/UserList";
-import Error from "../pages/Error/Error";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -15,18 +15,18 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: (
-          <PrivateRoute>
+          <PrivateRoutes>
             <Dashboard></Dashboard>
-          </PrivateRoute>
+          </PrivateRoutes>
         ),
       },
 
       {
         path: "/users",
         element: (
-          <PrivateRoute>
+          <PrivateRoutes>
             <UserList></UserList>
-          </PrivateRoute>
+          </PrivateRoutes>
         ),
       },
     ],
