@@ -1,8 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { Input } from "antd";
+import React from "react";
 import { GoBell } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
-// import React from "react";
-// const { Search } = Input;
 
 const Header = () => {
   return (

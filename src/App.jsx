@@ -15,13 +15,9 @@ function App() {
         headerColor: "#4E5D78",
         headerSplitColor: "none",
       },
-      Pagination: {
-        itemSelectedBg: "#2F80ED",
-        // item: "#2F80ED",
-        itemSelectedColor: "#ffffff",
-      },
       // Pagination: {
-      //   item: "#2F80ED",
+      //   itemSelectedBg: "#2F80ED",
+      //   itemSelectedColor: "#ffffff",
       // },
     },
   };

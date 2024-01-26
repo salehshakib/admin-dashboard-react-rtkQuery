@@ -1,7 +1,6 @@
-// import React from 'react';
+/* eslint-disable no-unused-vars */
 import { Button, Checkbox, Divider, Form, Input } from "antd";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { Link } from "react-router-dom";
 import SignInHeader from "./../../Shared/Header/SignInHeader";
