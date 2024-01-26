@@ -24,7 +24,7 @@ const Register = () => {
       navigate("/login");
     }
     if (userInfo) {
-      navigate("/dashboard");
+      navigate("/");
     }
   }, [navigate, userInfo, success]);
 

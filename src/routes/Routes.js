@@ -5,6 +5,7 @@ import Login from "../pages/SignIn/Login/Login";
 import Register from "../pages/SignIn/Register/Register";
 import UserList from "../pages/UserList/UserList";
 import Error from "../pages/Error/Error";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -13,12 +14,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Dashboard></Dashboard>,
+        element: (
+          <PrivateRoute>
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+        ),
       },
 
       {
         path: "/users",
-        element: <UserList></UserList>,
+        element: (
+          <PrivateRoute>
+            <UserList></UserList>
+          </PrivateRoute>
+        ),
       },
     ],
   },

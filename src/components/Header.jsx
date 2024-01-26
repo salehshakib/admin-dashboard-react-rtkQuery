@@ -1,12 +1,39 @@
 /* eslint-disable no-unused-vars */
 import { Input } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { GoBell } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetUserDetailsQuery } from "../app/services/auth/authServices";
+import { setCredentials } from "../features/auth/authSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  console.log(userInfo);
+
+  // automatically authenticate user if token is found
+  const { data, isFetching } = useGetUserDetailsQuery("userDetails", {
+    pollingInterval: 900000, // refetch every 15mins
+  });
+
+  console.log(data);
+
+  useEffect(() => {
+    if (data) dispatch(setCredentials(data));
+  }, [data, dispatch]);
+
   return (
     <div className="mb-12 flex justify-between items-center mt-6 ">
+      <span>
+        {isFetching
+          ? `Fetching your profile...`
+          : userInfo !== null
+          ? `Logged in as ${userInfo?.email}`
+          : "You're not logged in"}
+      </span>
       <Input
         placeholder="Search"
         suffix={<IoIosSearch className="text-[17px]" />}
@@ -21,14 +48,6 @@ const Header = () => {
           alt="no_image"
         />
       </div>
-      {/* <div className="flex items-center justify-center gap-[10px]">
-        <img src="/src/assets/paper.png" alt="no_image" className="w-12" />
-        <span className="text-[#4E5D78] font-bold text-[28px]">Stack</span>
-      </div> */}
-      {/* <Space className="bg-[#F0F5FA] rounded-[16px] text-[#B0B7C3] font-medium text-[12px] w-[146px] flex justify-center items-center gap-5">
-        English (UK)
-        <DownOutlined className="" />
-      </Space> */}
     </div>
   );
 };

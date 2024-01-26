@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createSlice } from "@reduxjs/toolkit";
 import { registerUser } from "./authAction";
 
@@ -5,26 +6,33 @@ const userToken = localStorage.getItem("userToken") ?? null;
 
 const initialState = {
   loading: false,
-  userInfo: {}, // for user object
-  userToken, // for storing the JWT
+  userInfo: {}, // user object
+  userToken, //jwt
   error: null,
-  success: false, // for monitoring the registration process.
+  success: false,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      // ...logout reducer
+    },
+    setCredentials: (state, { payload }) => {
+      state.userInfo = payload;
+    },
+  },
   extraReducers: (builder) => {
     // register user
     builder.addCase(registerUser.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
-    // eslint-disable-next-line no-unused-vars
+    // registration successful
     builder.addCase(registerUser.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.success = true; // registration successful
+      state.success = true;
       // state.userToken
     });
     builder.addCase(registerUser.rejected, (state, { payload }) => {
@@ -34,6 +42,5 @@ export const authSlice = createSlice({
   },
 });
 
-// export const {} = authSlice.actions;
-
+export const { logout, setCredentials } = authSlice.actions;
 export default authSlice.reducer;
