@@ -40,13 +40,23 @@ const Sidemenu = () => {
     ),
   ];
   return (
-    <Menu
-      mode="inline"
-      style={{
-        width: 256,
-      }}
-      items={items}
-    />
+    <div className="font-medium border-r-[1px] pt-7 min-h-[95vh]">
+      <div className="flex items-center gap-[10px] ">
+        <img src="/src/assets/paper.png" alt="no_image" className="w-12" />
+        <span className="text-[#4E5D78] font-bold text-[28px]">Stack</span>
+      </div>
+      <div className="text-[12px] text-[#B0B7C3] mt-10">PAGES</div>
+      <Menu
+        mode="vertical"
+        style={{
+          width: 256,
+          border: "none",
+        }}
+        items={items}
+        className="text-[14px] text-[#A7AFBC] mt-7 -ml-5"
+        defaultSelectedKeys={["dashboard"]}
+      />
+    </div>
   );
 };
 

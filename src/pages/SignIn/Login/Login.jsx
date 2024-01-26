@@ -1,6 +1,7 @@
 // import React from "react";
 import { Button, Checkbox, Divider, Form, Input } from "antd";
 import { useState } from "react";
+import { RiUserSmileFill } from "react-icons/ri";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { Link } from "react-router-dom";
 import SignInHeader from "./../../Shared/Header/SignInHeader";
@@ -109,11 +110,13 @@ const Login = () => {
                 <Input
                   className="rounded-[16px] h-[58px] text-[16px]"
                   prefix={
-                    <img
-                      src="/src/assets/smile.png"
-                      alt="no_image"
-                      className="w-[20px] mr-2"
-                    />
+                    // <img
+                    //   src="/src/assets/smile.png"
+                    //   alt="no_image"
+                    //   className="w-[20px] mr-2"
+                    // />
+
+                    <RiUserSmileFill className="text-[20px] mr-2 text-[#C5CBD3]" />
                   }
                   placeholder="Your Name"
                 />
