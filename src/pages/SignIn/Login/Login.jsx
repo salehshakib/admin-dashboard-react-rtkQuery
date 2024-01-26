@@ -1,13 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { Button, Checkbox, Divider, Form, Input } from "antd";
 import React, { useEffect, useState } from "react";
-import { RiUserSmileFill } from "react-icons/ri";
 import PasswordStrengthBar from "react-password-strength-bar";
-import { Link } from "react-router-dom";
-import SignInHeader from "./../../Shared/Header/SignInHeader";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import SignInHeader from "../../../components/SignInHeader";
 import { userLogin } from "../../../features/auth/authAction";
 
 const Login = () => {

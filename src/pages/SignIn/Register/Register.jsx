@@ -3,12 +3,10 @@ import { Button, Checkbox, Divider, Form, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import { RiUserSmileFill } from "react-icons/ri";
 import PasswordStrengthBar from "react-password-strength-bar";
-import { Link } from "react-router-dom";
-import SignInHeader from "./../../Shared/Header/SignInHeader";
 import { useDispatch, useSelector } from "react-redux";
-import Error from "../../Error/Error";
+import { Link, useNavigate } from "react-router-dom";
+import SignInHeader from "../../../components/SignInHeader";
 import { registerUser } from "../../../features/auth/authAction";
-import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [registerForm] = Form.useForm();
