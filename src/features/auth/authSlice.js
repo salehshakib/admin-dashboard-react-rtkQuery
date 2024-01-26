@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { registerUser } from "./authAction";
 
+const userToken = localStorage.getItem("userToken") ?? null;
+
 const initialState = {
   loading: false,
   userInfo: {}, // for user object
-  userToken: null, // for storing the JWT
+  userToken, // for storing the JWT
   error: null,
   success: false, // for monitoring the registration process.
 };

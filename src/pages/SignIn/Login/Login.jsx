@@ -1,19 +1,42 @@
 /* eslint-disable no-unused-vars */
 import { Button, Checkbox, Divider, Form, Input } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiUserSmileFill } from "react-icons/ri";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { Link } from "react-router-dom";
 import SignInHeader from "./../../Shared/Header/SignInHeader";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { userLogin } from "../../../features/auth/authAction";
 
 const Login = () => {
   const [loginForm] = Form.useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { loading, userInfo, error } = useSelector((state) => state.user);
 
   const [password, setPassword] = useState("");
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/dashboard");
+    }
+  }, [navigate, userInfo]);
+
+  const onFinish = () => {
+    loginForm
+      .validateFields()
+      .then(() => {
+        const { email, password } = userLogin.getFieldsValue();
+        dispatch(userLogin({ email, password }));
+      })
+      .catch((error) => {
+        console.error("Validation failed:", error);
+      });
   };
+
   return (
     <>
       <SignInHeader />
@@ -127,6 +150,7 @@ const Login = () => {
                 <Button
                   type="primary"
                   className="bg-[#377DFF] w-full rounded-[16px] h-[58px]"
+                  onClick={onFinish}
                 >
                   Sign In
                 </Button>

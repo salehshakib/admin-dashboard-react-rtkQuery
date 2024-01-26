@@ -1,18 +1,45 @@
 /* eslint-disable no-unused-vars */
 import { Button, Checkbox, Divider, Form, Input } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiUserSmileFill } from "react-icons/ri";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { Link } from "react-router-dom";
 import SignInHeader from "./../../Shared/Header/SignInHeader";
+import { useDispatch, useSelector } from "react-redux";
+import Error from "../../Error/Error";
+import { registerUser } from "../../../features/auth/authAction";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [registerForm] = Form.useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { loading, userInfo, error, success } = useSelector(
+    (state) => state.auth
+  );
 
   const [password, setPassword] = useState("");
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  useEffect(() => {
+    if (success) {
+      navigate("/login");
+    }
+    if (userInfo) {
+      navigate("/dashboard");
+    }
+  }, [navigate, userInfo, success]);
+
+  const onFinish = () => {
+    registerForm
+      .validateFields()
+      .then(() => {
+        const { email, name, password } = registerForm.getFieldsValue();
+        dispatch(registerUser({ email, name, password }));
+      })
+      .catch((error) => {
+        console.error("Validation failed:", error);
+      });
   };
 
   return (
@@ -142,10 +169,12 @@ const Register = () => {
                 </Checkbox>
               </Form.Item>
 
-              <Form.Item name="button">
+              <Form.Item>
                 <Button
                   type="primary"
                   className="bg-[#377DFF] w-full rounded-[16px] h-[58px]"
+                  onClick={onFinish}
+                  loading={loading}
                 >
                   Sign Up
                 </Button>
