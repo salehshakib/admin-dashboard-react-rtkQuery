@@ -2,15 +2,11 @@
 import { Pagination, Table } from "antd";
 import React, { useState } from "react";
 import { SlOptions } from "react-icons/sl";
+import { useLocation } from "react-router-dom";
 import { GlobalUtilityStyle } from "../../styled";
-import { useSelector } from "react-redux";
 
 const UserList = () => {
   const [size, setSize] = useState(1);
-
-  // const { userInfo } = useSelector((state) => state.user);
-
-  // console.log(userInfo);
 
   const columns = [
     {

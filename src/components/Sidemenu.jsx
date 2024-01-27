@@ -5,10 +5,17 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Sidemenu = () => {
+  const location = useLocation();
+  const { pathname } = location;
+
+  const [activeKey, setActiveKey] = useState(
+    pathname === "/users" ? "users" : "dashboard"
+  );
+
   function getItem(label, key, icon, children, type) {
     return {
       key,
@@ -55,7 +62,11 @@ const Sidemenu = () => {
         }}
         items={items}
         className="text-[14px] text-[#A7AFBC] mt-7 -ml-5 font-medium"
-        defaultSelectedKeys={["dashboard"]}
+        // defaultSelectedKeys={["dashboard"]}
+        // activeKey={activeKey}
+        selectedKeys={activeKey}
+        // onChange={(value) => console.log(event.target.value)}
+        onClick={({ key }) => setActiveKey(key)}
       />
     </div>
   );
