@@ -229,13 +229,13 @@ const UserList = () => {
       </div>
 
       <div
-        className=" table-th-shape-none table-last-th-text-right table-th-border-none table-head-rounded table-td-border-none 
+        className="table-th-shape-none table-last-th-text-right table-th-border-none table-head-rounded table-td-border-none 
         table-last-td-text-right
       "
       >
         <Table
           columns={columns}
-          className="mt-10"
+          className="mt-10 "
           dataSource={dataSource}
           pagination={false}
           onRow={(record, index) => ({

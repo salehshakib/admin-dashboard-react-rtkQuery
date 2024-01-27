@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { Input } from "antd";
-import React, { useEffect } from "react";
+import { Input, Popover } from "antd";
+import React, { useEffect, useState } from "react";
 import { GoBell } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetUserDetailsQuery } from "../app/services/auth/authServices";
 import { logout, setCredentials } from "../features/auth/authSlice";
+import { Button } from "antd";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,20 @@ const Header = () => {
   const { userToken } = useSelector((state) => state.auth);
 
   const { data: userData, isFetching } = useGetUserDetailsQuery("userDetails");
+
+  const [open, setOpen] = useState(false);
+
+  const hide = () => {
+    setOpen(false);
+  };
+  const handleOpenChange = (newOpen) => {
+    setOpen(newOpen);
+  };
+
+  const logOut = () => {
+    dispatch(logout());
+    hide();
+  };
 
   useEffect(() => {
     if (userToken) {
@@ -30,12 +45,19 @@ const Header = () => {
 
       <div className="flex items-center justify-center gap-11">
         <GoBell className="text-[25px] text-[#B0B7C3]" />
-        <img
-          src={userData?.data?.avatar}
-          className="w-12 h-12 object-cover rounded-full"
-          alt="no_image"
-          onClick={() => dispatch(logout())}
-        />
+
+        <Popover
+          content={<Button onClick={logOut}>Logout</Button>}
+          trigger="click"
+          open={open}
+          onOpenChange={handleOpenChange}
+        >
+          <img
+            src={userData?.data?.avatar}
+            className="w-12 h-12 object-cover rounded-full hover:cursor-pointer"
+            alt="no_image"
+          />
+        </Popover>
       </div>
     </div>
   );
