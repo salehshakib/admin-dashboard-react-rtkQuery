@@ -58,13 +58,16 @@ export const userApi = createApi({
       onQueryStarted({ id, data, pageSize }, { dispatch }) {
         console.log(id, data, pageSize);
         dispatch(
-          userApi.util.upsertQueryData("getUserList", pageSize, (draft) => {
+          userApi.util.updateQueryData("getUserList", pageSize, (draft) => {
             const updatedUserIndex = draft.data.findIndex(
               (user) => user.id === id
             );
 
             if (updatedUserIndex !== -1) {
-              draft.data.splice(updatedUserIndex, 1, { id, ...data });
+              draft.data.splice(updatedUserIndex, 1, {
+                ...draft.data[updatedUserIndex],
+                ...data,
+              });
             }
           })
         );
