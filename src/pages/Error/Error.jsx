@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Error = () => {
   const navigate = useNavigate();
 
-  const { userInfo } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!userInfo) {

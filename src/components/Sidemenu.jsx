@@ -6,9 +6,13 @@ import {
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 const Sidemenu = () => {
+  const params = useParams();
+
+  console.log(params);
+
   function getItem(label, key, icon, children, type) {
     return {
       key,
@@ -56,6 +60,7 @@ const Sidemenu = () => {
         items={items}
         className="text-[14px] text-[#A7AFBC] mt-7 -ml-5 font-medium"
         defaultSelectedKeys={["dashboard"]}
+        activeKey=""
       />
     </div>
   );

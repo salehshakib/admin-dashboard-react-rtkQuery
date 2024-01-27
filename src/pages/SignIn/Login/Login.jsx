@@ -77,7 +77,7 @@ const Login = () => {
               name="loginForm"
               form={loginForm}
               onFinish={onFinish}
-              autoComplete="off"
+              autoComplete="on"
               className="text-start"
             >
               <Form.Item
