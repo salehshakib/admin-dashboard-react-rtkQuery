@@ -50,7 +50,11 @@ const Sidemenu = () => {
   return (
     <div className="font-medium border-r-[1px] pt-7 min-h-[95vh]">
       <div className="flex items-center gap-[10px] ">
-        <img src="/src/assets/paper.png" alt="no_image" className="w-12" />
+        <img
+          src="https://i.ibb.co/XYpLq2w/paper.png"
+          alt="no_image"
+          className="w-12"
+        />
         <span className="text-[#4E5D78] font-bold text-[28px]">Stack</span>
       </div>
       <div className="text-[12px] text-[#B0B7C3] mt-10">PAGES</div>

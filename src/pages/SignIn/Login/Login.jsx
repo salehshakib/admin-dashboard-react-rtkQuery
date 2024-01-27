@@ -65,7 +65,7 @@ const Login = () => {
           <div className="mt-7 flex justify-center items-center gap-[35px] w-full  ">
             <Button className="text-[#8A94A6] text-[16px] font-medium flex justify-center items-center gap-2 rounded-[16px] bg-[#F0F5FA] w-[255px] h-[58px] border-none">
               <img
-                src="/src/assets/google-symbol.png"
+                src="https://i.ibb.co/N6HXT9t/google-symbol.png"
                 alt="no_image"
                 className="w-[25px] h-[25px]"
               />
@@ -74,10 +74,11 @@ const Login = () => {
 
             <Button className="text-[#8A94A6] text-[16px] font-medium flex justify-center items-center gap-2 rounded-[16px] bg-[#F0F5FA] w-[255px] h-[58px] border-none">
               <img
-                src="/src/assets/apple.png"
+                src="https://i.ibb.co/7NShhxw/apple.png"
                 alt="no_image"
                 className="w-[25px] h-[25px]"
               />
+
               <span>Sign Up with Apple Id</span>
             </Button>
           </div>
@@ -110,7 +111,7 @@ const Login = () => {
                   placeholder="Your Email"
                   prefix={
                     <img
-                      src="/src/assets/at.png"
+                      src="https://i.ibb.co/p2hSTDr/at.png"
                       alt="no_image"
                       className="w-[20px] mr-2"
                     />
@@ -134,7 +135,7 @@ const Login = () => {
                     placeholder="Password"
                     prefix={
                       <img
-                        src="/src/assets/lock.png"
+                        src="https://i.ibb.co/PmnR3M6/lock.png"
                         alt="no_image"
                         className="w-[20px] mr-2"
                       />
