@@ -26,36 +26,24 @@ export const userApi = createApi({
         method: "GET",
         params: {
           page: pageSize,
-          per_page: 600,
         },
       }),
       // providesTags: ["userList"],
     }),
 
     createUser: builder.mutation({
-      query: (data) => ({
+      query: ({ userData }) => ({
         url: CREATE_USER,
         method: "POST",
-        body: data,
+        body: userData,
       }),
 
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const { data: user } = await queryFulfilled;
-
-          if (user) {
-            dispatch(
-              userApi.util.upsertQueryData(
-                "getUserList",
-                undefined,
-                (draft) => console.log(draft.data)
-                // draft.data
-              )
-            );
-          }
-        } catch (error) {
-          console.log(error);
-        }
+      onQueryStarted({ pageSize, userData }, { dispatch }) {
+        dispatch(
+          userApi.util.updateQueryData("getUserList", pageSize, (draft) => {
+            draft.data.unshift(userData);
+          })
+        );
       },
       // invalidatesTags: ["userList"],
     }),
@@ -67,30 +55,19 @@ export const userApi = createApi({
         body: data,
       }),
 
-      async onQueryStarted({ id }, { queryFulfilled, dispatch }) {
-        try {
-          const { data: user } = await queryFulfilled;
-
-          if (user) {
-            dispatch(
-              userApi.util.upsertQueryData(
-                "getUserList",
-                undefined,
-                (draft) => {
-                  // eslint-disable-next-line eqeqeq
-                  const updatedTaskIndex = draft.findIndex(
-                    (user) => user.data.id == id
-                  );
-
-                  draft.splice(updatedTaskIndex, 1, user);
-                }
-                // draft.data
-              )
+      onQueryStarted({ id, data, pageSize }, { dispatch }) {
+        console.log(id, data, pageSize);
+        dispatch(
+          userApi.util.upsertQueryData("getUserList", pageSize, (draft) => {
+            const updatedUserIndex = draft.data.findIndex(
+              (user) => user.id === id
             );
-          }
-        } catch (error) {
-          console.log(error);
-        }
+
+            if (updatedUserIndex !== -1) {
+              draft.data.splice(updatedUserIndex, 1, { id, ...data });
+            }
+          })
+        );
       },
     }),
 
@@ -100,21 +77,18 @@ export const userApi = createApi({
         method: "DELETE",
       }),
 
-      async onQueryStarted({ id }, { queryFulfilled, dispatch }) {
-        let patchResult = dispatch(
-          userApi.util.updateQueryData("getUserList", undefined, (draft) => {
-            console.log(draft);
-            const deletedTaskIndex = draft.findIndex(
-              (user) => user.data.id === id
+      onQueryStarted({ id, pageSize }, { dispatch }) {
+        dispatch(
+          userApi.util.updateQueryData("getUserList", pageSize, (draft) => {
+            const deletedUserIndex = draft.data.findIndex(
+              (user) => user.id === id
             );
 
-            draft.splice(deletedTaskIndex, 1);
+            if (deletedUserIndex !== -1) {
+              draft.data.splice(deletedUserIndex, 1);
+            }
           })
         );
-
-        await queryFulfilled.catch(() => {
-          patchResult.undo();
-        });
       },
     }),
   }),

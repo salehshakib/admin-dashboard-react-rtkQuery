@@ -12,6 +12,7 @@ const Main = () => {
         <div className=" w-screen">
           <Header></Header>
           <Outlet></Outlet>
+          <div className="mb-20"></div>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import { logout, setCredentials } from "../features/auth/authSlice";
 const Header = () => {
   const dispatch = useDispatch();
 
-  const { userInfo, userToken } = useSelector((state) => state.auth);
+  const { userToken } = useSelector((state) => state.auth);
 
   const { data: userData, isFetching } = useGetUserDetailsQuery("userDetails");
 
@@ -20,15 +20,6 @@ const Header = () => {
     }
   }, [dispatch, userData?.data, userToken]);
 
-  // useEffect(() => {
-  //   if (userToken) {
-  //     const data = dispatch(getUserDetails());
-  //     console.log(data);
-  //   }
-  // }, [dispatch, userToken]);
-
-  // console.log(userInfo);
-
   return (
     <div className="mb-12 flex justify-between items-center mt-6 ">
       <Input
@@ -37,7 +28,7 @@ const Header = () => {
         className=" w-[539px] h-[54px]  bg-[#F0F5FA] text-[#B0B7C3] text-[14px] border-none rounded-[14px] px-3"
       />
 
-      <div className="flex items-center justify-center gap-11 ">
+      <div className="flex items-center justify-center gap-11">
         <GoBell className="text-[25px] text-[#B0B7C3]" />
         <img
           src={userData?.data?.avatar}
