@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 const PrivateRoutes = ({ children }) => {
   const navigate = useNavigate();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo, userToken } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (!userInfo) {
+    if (!userToken) {
       navigate("/login");
     }
-  }, [navigate, userInfo]);
+  }, [navigate, userToken]);
 
   return children;
 };

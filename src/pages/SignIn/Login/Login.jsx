@@ -27,14 +27,15 @@ const Login = () => {
   useEffect(() => {
     if (userToken) {
       dispatch(setCredentials(userData?.data));
-    }
-  }, [dispatch, userData?.data, userToken]);
-
-  useEffect(() => {
-    if (userInfo) {
       navigate("/");
     }
-  }, [dispatch, navigate, userInfo, userToken]);
+  }, [dispatch, navigate, userData?.data, userToken]);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/");
+  //   }
+  // }, [navigate, userInfo]);
 
   const onFinish = () => {
     loginForm
@@ -90,7 +91,7 @@ const Login = () => {
               name="loginForm"
               form={loginForm}
               onFinish={onFinish}
-              autoComplete="off"
+              autoComplete="on"
               className="text-start"
             >
               <Form.Item
