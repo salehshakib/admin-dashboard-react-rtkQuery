@@ -15,10 +15,6 @@ function App() {
         headerColor: "#4E5D78",
         headerSplitColor: "none",
       },
-      // Pagination: {
-      //   itemSelectedBg: "#2F80ED",
-      //   itemSelectedColor: "#ffffff",
-      // },
     },
   };
   return (
