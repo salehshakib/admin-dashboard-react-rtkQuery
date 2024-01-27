@@ -40,8 +40,8 @@ const Header = () => {
       <div className="flex items-center justify-center gap-11 ">
         <GoBell className="text-[25px] text-[#B0B7C3]" />
         <img
-          src="/src/assets/profile-pic (1).png"
-          className="w-12 h-12 object-cover"
+          src={userData?.data?.avatar}
+          className="w-12 h-12 object-cover rounded-full"
           alt="no_image"
           onClick={() => dispatch(logout())}
         />
