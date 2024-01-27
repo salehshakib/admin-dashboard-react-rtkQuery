@@ -21,9 +21,6 @@ const UserList = () => {
   const [isUpdateUserModalOpen, setIsUpdateUserModalOpen] = useState(false);
 
   const { data: userListData } = useGetUserListQuery(pageSize);
-  const data = useGetUserListQuery(pageSize);
-
-  console.log(data);
 
   const [createUser, { isLoading: createUserLoading }] =
     useCreateUserMutation();

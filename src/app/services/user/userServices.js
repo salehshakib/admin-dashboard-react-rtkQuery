@@ -56,7 +56,6 @@ export const userApi = createApi({
       }),
 
       onQueryStarted({ id, data, pageSize }, { dispatch }) {
-        console.log(id, data, pageSize);
         dispatch(
           userApi.util.updateQueryData("getUserList", pageSize, (draft) => {
             const updatedUserIndex = draft.data.findIndex(
