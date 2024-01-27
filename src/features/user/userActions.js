@@ -63,7 +63,7 @@ const getUserDetails = createAsyncThunk(
         },
       };
       const { data } = await axios.get(`${API_URL}${LOGIN}`, config);
-      localStorage.setItem("userToken", data?.token);
+      // localStorage.setItem("userToken", data?.token);
       return data;
     } catch (error) {
       console.log(error);

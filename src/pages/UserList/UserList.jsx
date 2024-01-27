@@ -1,49 +1,73 @@
 /* eslint-disable no-unused-vars */
 import { Pagination, Table } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { SlOptions } from "react-icons/sl";
 import { GlobalUtilityStyle } from "../../styled";
-
-const columns = [
-  {
-    title: "#ID",
-    dataIndex: "id",
-    key: "id",
-    align: "center",
-    width: "130px",
-  },
-  {
-    title: "USER",
-    dataIndex: "user",
-    key: "user",
-  },
-  {
-    title: "EMAIL",
-    dataIndex: "email",
-    key: "email",
-  },
-  {
-    title: "OPTIONS",
-    dataIndex: "options",
-    key: "options",
-    align: "end",
-  },
-];
-
-const dataSource = [
-  {
-    id: 1,
-    user: "Saleh Shakib",
-    email: "salehshakib.ss@gmail.com",
-    options: (
-      <div>
-        <SlOptions className="" />
-      </div>
-    ),
-  },
-];
+import { useSelector } from "react-redux";
 
 const UserList = () => {
+  const [size, setSize] = useState(1);
+
+  // const { userInfo } = useSelector((state) => state.user);
+
+  // console.log(userInfo);
+
+  const columns = [
+    {
+      title: "#ID",
+      dataIndex: "id",
+      key: "id",
+      align: "center",
+      width: "130px",
+    },
+    {
+      title: "USER",
+      dataIndex: "user",
+      key: "user",
+    },
+    {
+      title: "EMAIL",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "OPTIONS",
+      dataIndex: "options",
+      key: "options",
+      align: "end",
+    },
+  ];
+
+  const dataSource = [
+    {
+      id: 1,
+      user: (
+        <div className="flex items-center">
+          <img
+            src="/src/assets/"
+            className="w-[60px] h-[60px] rounded-[15px]"
+            alt=""
+          />
+        </div>
+      ),
+      email: "salehshakib.ss@gmail.com",
+      options: (
+        <div>
+          <SlOptions className="" />
+        </div>
+      ),
+    },
+    {
+      id: 2,
+      user: "Saleh Shakib",
+      email: "salehshakib.ss@gmail.com",
+      options: (
+        <div>
+          <SlOptions className="" />
+        </div>
+      ),
+    },
+  ];
   return (
     <GlobalUtilityStyle>
       <div className="font-semibold text-[23px] text-[#323B4B] ">
@@ -67,6 +91,7 @@ const UserList = () => {
         className="mt-12 "
         total={80}
         showSizeChanger={false}
+        onChange={(size) => setSize(size)}
       />
     </GlobalUtilityStyle>
   );

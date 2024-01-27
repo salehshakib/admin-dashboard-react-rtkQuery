@@ -4,8 +4,10 @@ import React, { useEffect, useState } from "react";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useGetUserDetailsQuery } from "../../../app/services/auth/authServices";
 import SignInHeader from "../../../components/SignInHeader";
-import { userLogin } from "../../../features/user/userActions";
+import { userLogin } from "../../../features/auth/authActions";
+import { setCredentials } from "../../../features/auth/authSlice";
 import Error from "../../Error/Error";
 
 const Login = () => {
@@ -13,15 +15,26 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading, userInfo, error } = useSelector((state) => state.user);
+  const { loading, userInfo, error, userToken } = useSelector(
+    (state) => state.auth
+  );
 
   const [password, setPassword] = useState("");
+
+  // automatically authenticate user if token is found
+  const { data: userData, isFetching } = useGetUserDetailsQuery("userDetails");
+
+  useEffect(() => {
+    if (userToken) {
+      dispatch(setCredentials(userData?.data));
+    }
+  }, [dispatch, userData?.data, userToken]);
 
   useEffect(() => {
     if (userInfo) {
       navigate("/");
     }
-  }, [navigate, userInfo]);
+  }, [dispatch, navigate, userInfo, userToken]);
 
   const onFinish = () => {
     loginForm

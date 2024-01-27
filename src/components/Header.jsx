@@ -5,39 +5,32 @@ import { GoBell } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetUserDetailsQuery } from "../app/services/auth/authServices";
-import { setCredentials } from "../features/auth/authSlice";
-import { logout } from "../features/user/userSlice";
-import { getUserDetails } from "../features/user/userActions";
+import { logout, setCredentials } from "../features/auth/authSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
 
   const { userInfo, userToken } = useSelector((state) => state.auth);
 
-  // automatically authenticate user if token is found
-  const { data, isFetching } = useGetUserDetailsQuery("userDetails", {
-    pollingInterval: 900000, // refetch every 15mins
-  });
-
-  useEffect(() => {
-    if (data) dispatch(setCredentials(data));
-  }, [data, dispatch]);
+  const { data: userData, isFetching } = useGetUserDetailsQuery("userDetails");
 
   useEffect(() => {
     if (userToken) {
-      dispatch(getUserDetails());
+      dispatch(setCredentials(userData?.data));
     }
-  }, [userToken, dispatch]);
+  }, [dispatch, userData?.data, userToken]);
+
+  // useEffect(() => {
+  //   if (userToken) {
+  //     const data = dispatch(getUserDetails());
+  //     console.log(data);
+  //   }
+  // }, [dispatch, userToken]);
+
+  // console.log(userInfo);
 
   return (
     <div className="mb-12 flex justify-between items-center mt-6 ">
-      <span>
-        {isFetching
-          ? `Fetching your profile...`
-          : userInfo !== null
-          ? `Logged in as ${userInfo?.data?.first_name}`
-          : "You're not logged in"}
-      </span>
       <Input
         placeholder="Search"
         suffix={<IoIosSearch className="text-[17px]" />}

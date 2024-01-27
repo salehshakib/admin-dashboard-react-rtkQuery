@@ -14,9 +14,11 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading, userInfo, error, success } = useSelector(
-    (state) => state.user
+  const { loading, userInfo, error, success, userToken } = useSelector(
+    (state) => state.auth
   );
+
+  // console.log(userInfo, userToken);
 
   const [password, setPassword] = useState("");
 
@@ -24,10 +26,11 @@ const Register = () => {
     if (success) {
       navigate("/login");
     }
-    if (userInfo) {
+
+    if (userInfo || userToken) {
       navigate("/");
     }
-  }, [navigate, userInfo, success]);
+  }, [navigate, userInfo, success, userToken]);
 
   const onFinish = () => {
     registerForm

@@ -53,4 +53,29 @@ const registerUser = createAsyncThunk(
   }
 );
 
+// const getUserDetails = createAsyncThunk(
+//   "auth/getDetails",
+//   async ({ rejectWithValue }) => {
+//     try {
+//       const config = {
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       };
+//       const { data } = await axios.get(`${API_URL}api/users/4`, config);
+//       console.log(data);
+
+//       return data;
+//     } catch (error) {
+//       console.log(error);
+//       // return custom error message from API if any
+//       if (error.response && error.response.data.message) {
+//         return rejectWithValue(error.response.data.message);
+//       } else {
+//         return rejectWithValue(error.message);
+//       }
+//     }
+//   }
+// );
+
 export { userLogin, registerUser };
