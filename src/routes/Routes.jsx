@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Error from "../pages/Error/Error";
+import Sales from "../pages/Sales/Sales";
 import Login from "../pages/SignIn/Login/Login";
 import Register from "../pages/SignIn/Register/Register";
 import UserList from "../pages/UserList/UserList";
@@ -28,6 +29,14 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      {
+        path: "/sales",
+        element: (
+          <PrivateRoutes>
+            <Sales></Sales>
+          </PrivateRoutes>
+        ),
+      },
     ],
   },
   {
@@ -38,6 +47,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register></Register>,
   },
+
   {
     path: "*",
     element: <Error></Error>,

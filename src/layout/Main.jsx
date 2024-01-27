@@ -9,7 +9,7 @@ const Main = () => {
     <div>
       <div className="flex gap-[38px]">
         <Sidemenu></Sidemenu>
-        <div className=" w-screen">
+        <div className="w-screen">
           <Header></Header>
           <Outlet></Outlet>
           <div className="mb-20"></div>

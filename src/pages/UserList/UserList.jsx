@@ -120,11 +120,6 @@ const UserList = () => {
   const dataSource = [];
 
   const items = [
-    // {
-    //   label: "Add New User",
-    //   key: "1",
-    //   className: "text-xs",
-    // },
     {
       label: "Update User",
       key: "2",
@@ -218,11 +213,15 @@ const UserList = () => {
   };
 
   return (
-    <GlobalUtilityStyle className="absolute max-w-screen-xl w-full ">
-      <div className="relative left-[calc(122vh)]">
+    <GlobalUtilityStyle className="">
+      <div className="w-full flex justify-between">
+        <div className="font-semibold text-[23px] text-[#323B4B] ">
+          Users List
+        </div>
         <Button
           type="default"
-          className="bg-[#377DFF] hover:text-white text-[14px] rounded-md border-none h-9 "
+          className="bg-[#377DFF] text-white text-[14px] rounded-md border-none h-9 w-36"
+          // style={{ transition: "color 0.3s ease" }}
           onClick={() => setIsCreateUserModalOpen(true)}
         >
           Add New User

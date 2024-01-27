@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
 
 const Error = () => {
   const navigate = useNavigate();
@@ -14,7 +15,11 @@ const Error = () => {
     }
   }, [navigate, userInfo]);
 
-  return <div>404 Not Found</div>;
+  return (
+    <div>
+      <Header></Header>404 Not Found
+    </div>
+  );
 };
 
 export default Error;

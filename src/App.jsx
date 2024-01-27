@@ -23,7 +23,7 @@ function App() {
   };
   return (
     <>
-      <div className="max-w-screen-2xl mx-auto">
+      <div className="max-w-screen-xl mx-auto lg:px-4 md:px-4 sm:px-2">
         <ConfigProvider theme={theme}>
           <RouterProvider router={router} />
         </ConfigProvider>
