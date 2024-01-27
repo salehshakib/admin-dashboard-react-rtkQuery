@@ -40,9 +40,9 @@ const Dashboard = () => {
     <>
       <div className="font-semibold text-[23px] text-[#323B4B]">Dashboard</div>
 
-      <Space size={20} direction="vertical">
-        <Space direction="horizontal" className="mt-5">
-          <Card>
+      <Space size={20} direction="vertical" className=" w-full">
+        <Space direction="horizontal" className="mt-5 flex justify-center">
+          <Card size="">
             <Space direction="horizontal">
               <ShoppingCartOutlined
                 style={{

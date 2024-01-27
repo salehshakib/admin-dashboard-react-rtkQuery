@@ -1,13 +1,13 @@
 import Styled from "styled-components";
 
 const GlobalUtilityStyle = Styled.div`
-  .table-head-none {
-    table {
-      thead {
-        display: none;
-      }
-    }
-  }
+  // .table-head-none {
+  //   table {
+  //     thead {
+  //       display: none;
+  //     }
+  //   }
+  // }
 
   .table-head-rounded {
     table {
@@ -16,12 +16,12 @@ const GlobalUtilityStyle = Styled.div`
           &:first-child {
             th {
               &:first-child {
-                border-top-left-radius: 10px;
-                border-bottom-left-radius: 10px;
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
               }
               &:last-child {
-                border-top-right-radius: 10px;
-                border-bottom-right-radius: 10px;
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
               }
             }
           }

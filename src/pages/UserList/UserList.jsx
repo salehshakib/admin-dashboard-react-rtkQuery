@@ -214,45 +214,47 @@ const UserList = () => {
 
   return (
     <GlobalUtilityStyle className="">
-      <div className="w-full flex justify-between">
+      <div className="flex justify-between ">
         <div className="font-semibold text-[23px] text-[#323B4B] ">
           Users List
         </div>
         <Button
           type="default"
           className="bg-[#377DFF] text-white text-[14px] rounded-md border-none h-9 w-36"
-          // style={{ transition: "color 0.3s ease" }}
           onClick={() => setIsCreateUserModalOpen(true)}
         >
           Add New User
         </Button>
       </div>
 
-      <div
-        className="table-th-shape-none table-last-th-text-right table-th-border-none table-head-rounded table-td-border-none 
-        table-last-td-text-right
-      "
-      >
+      <div className="table-th-shape-none table-last-th-text-right table-th-border-none table-head-rounded table-td-border-none table-last-td-text-right">
         <Table
           columns={columns}
-          className="mt-10 "
+          className="mt-10"
           dataSource={dataSource}
-          pagination={false}
+          // pagination={false}
           onRow={(record, index) => ({
             onClick: () => handleRowClick(record, index),
           })}
+          pagination={{
+            className: "mt-12 ml-3",
+            position: ["bottomLeft"],
+            size: "small",
+            total: userListData?.total,
+            showSizeChanger: false,
+            onChange: (page, pageSize) => {
+              setPageSize(page);
+            },
+          }}
         />
       </div>
-      <Pagination
-        size="default"
-        className="mt-12 "
+      {/* <Pagination
+        size="small"
+        className="mt-12"
         total={userListData?.total}
         showSizeChanger={false}
-        // size={6}
-        // setPageSize={6}
-        // defaultPageSize={6}
         onChange={(size) => setPageSize(size)}
-      />
+      /> */}
 
       <Modal
         title="Create User"
