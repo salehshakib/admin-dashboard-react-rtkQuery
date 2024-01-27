@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Button, Checkbox, Divider, Form, Input } from "antd";
+import { Button, Checkbox, Divider, Form, Input, notification } from "antd";
 import React, { useEffect, useState } from "react";
 import { RiUserSmileFill } from "react-icons/ri";
 import PasswordStrengthBar from "react-password-strength-bar";
@@ -8,29 +8,50 @@ import { Link, useNavigate } from "react-router-dom";
 import SignInHeader from "../../../components/SignInHeader";
 import { registerUser } from "../../../features/auth/authActions";
 import Error from "../../Error/Error";
+import { registerCompleted } from "../../../features/auth/authSlice";
 
 const Register = () => {
   const [registerForm] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // const [api, contextHolder] = notification.useNotification();
+  // const openNotificationWithIcon = (type) => {
+  //   api[type]({
+  //     message: "Registration Successful",
+  //     description: "Congrats, Now you will be redirect to login page.",
+  //   });
+  // };
+
+  const openNotification = () => {
+    notification.open({
+      type: "success",
+      message: "Registration Successful",
+      description: "Congrats, Now you will be redirect to login page.",
+    });
+  };
+
   const { loading, userInfo, error, success, userToken } = useSelector(
     (state) => state.auth
   );
 
-  // console.log(userInfo, userToken);
-
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    if (success) {
-      navigate("/login");
-    }
-
     if (userInfo || userToken) {
       navigate("/");
     }
-  }, [navigate, userInfo, success, userToken]);
+  }, [navigate, userInfo, userToken]);
+
+  useEffect(() => {
+    if (success) {
+      // openNotificationWithIcon("success");
+      openNotification();
+      navigate("/login");
+      dispatch(registerCompleted());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate, success]);
 
   const onFinish = () => {
     registerForm

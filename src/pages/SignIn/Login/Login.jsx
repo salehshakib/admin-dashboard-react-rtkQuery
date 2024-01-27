@@ -9,11 +9,28 @@ import SignInHeader from "../../../components/SignInHeader";
 import { userLogin } from "../../../features/auth/authActions";
 import { setCredentials } from "../../../features/auth/authSlice";
 import Error from "../../Error/Error";
+import { notification } from "antd";
 
 const Login = () => {
   const [loginForm] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // const [api, contextHolder] = notification.useNotification();
+  // const openNotificationWithIcon = (type) => {
+  //   api[type]({
+  //     message: "Login Successful",
+  //     description: "You are logged in!!!",
+  //   });
+  // };
+
+  const openNotification = () => {
+    notification.open({
+      type: "success",
+      message: "Login Successful",
+      description: "You are logged in!!!",
+    });
+  };
 
   const { loading, userInfo, error, userToken } = useSelector(
     (state) => state.auth
@@ -32,9 +49,12 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
+      // openNotificationWithIcon("success");
+      openNotification();
       navigate("/");
     }
-  }, [dispatch, navigate, userInfo, userToken]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigate, userInfo]);
 
   const onFinish = () => {
     loginForm
@@ -50,6 +70,7 @@ const Login = () => {
 
   return (
     <>
+      {/* {contextHolder} */}
       <SignInHeader />
       {error && <Error>{error}</Error>}
       <div className="mt-[122px] w-full text-center">
@@ -90,7 +111,7 @@ const Login = () => {
               name="loginForm"
               form={loginForm}
               onFinish={onFinish}
-              autoComplete="off"
+              autoComplete="on"
               className="text-start"
             >
               <Form.Item

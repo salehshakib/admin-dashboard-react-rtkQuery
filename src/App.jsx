@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { ConfigProvider } from "antd";
+import React from "react";
 import { RouterProvider } from "react-router-dom";
 import router from "./routes/Routes";
 
@@ -15,10 +17,6 @@ function App() {
         headerColor: "#4E5D78",
         headerSplitColor: "none",
       },
-      // Pagination: {
-      //   itemSelectedBg: "#2F80ED",
-      //   itemSelectedColor: "#ffffff",
-      // },
     },
   };
   return (
